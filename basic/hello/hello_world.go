@@ -5,6 +5,6 @@ import (
 )
 
 func main() {
-	// how to print something
+	// how to print
 	fmt.Println("Hello, World")
 }
