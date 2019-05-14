@@ -13,3 +13,5 @@
 
 # ide config
 .idea/
+
+bin/
