@@ -14,4 +14,7 @@
 # ide config
 .idea/
 
+# db
+*.db
+
 bin/
