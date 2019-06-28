@@ -9,4 +9,5 @@ require (
 	github.com/kr/pretty v0.1.0 // indirect
 	golang.org/x/net v0.0.0-20190514140710-3ec191127204
 	google.golang.org/grpc v1.19.0
+	gopkg.in/gormigrate.v1 v1.5.0
 )
