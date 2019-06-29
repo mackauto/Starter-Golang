@@ -24,7 +24,11 @@ func main() {
 		{
 			ID: "201906281430",
 			Migrate: func(db *gorm.DB) error {
-				return db.AutoMigrate(&model.Person{}).Error
+				type Person struct {
+					gorm.Model
+					Name string
+				}
+				return db.AutoMigrate(&Person{}).Error
 			},
 			Rollback: func(db *gorm.DB) error {
 				return db.DropTable("person").Error
@@ -33,7 +37,10 @@ func main() {
 		{
 			ID: "201906281445",
 			Migrate: func(db *gorm.DB) error {
-				return db.AutoMigrate(&model.Person{}).Error
+				type Person struct {
+					Age int `gorm:"index;not null"`
+				}
+				return db.AutoMigrate(&Person{}).Error
 			},
 			Rollback: func(db *gorm.DB) error {
 				return db.Table("person").DropColumn("age").Error
@@ -42,7 +49,18 @@ func main() {
 		{
 			ID: "201906281450",
 			Migrate: func(db *gorm.DB) error {
-				if err := db.AutoMigrate(&model.Pet{}).Error; err != nil {
+				type Person struct {
+					gorm.Model
+					Name string
+					Age int `gorm:"index;not null"`
+				}
+				type Pet struct {
+					gorm.Model
+					Name     string
+					Person   Person
+					PersonID uint
+				}
+				if err := db.AutoMigrate(&Pet{}).Error; err != nil {
 					return err
 				}
 				//if err = db.Model(&model.Pet{}).AddForeignKey("person_id", "person(id)", "RESTRICT", "RESTRICT").Error; err != nil {
