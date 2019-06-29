@@ -4,13 +4,15 @@ import (
 	"github.com/JPMike/Starter-Golang/orm/gorm_example/model"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
+	_ "github.com/jinzhu/gorm/dialects/postgres"
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
 	"gopkg.in/gormigrate.v1"
 	"log"
 )
 
 func main() {
-	db, err := gorm.Open("sqlite3", "test.db")
+	//db, err := gorm.Open("sqlite3", "test.db")
+	db, err := gorm.Open("postgres", "postgres://gorm:password@localhost/gorm?sslmode=disable")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -52,7 +54,7 @@ func main() {
 				type Person struct {
 					gorm.Model
 					Name string
-					Age int `gorm:"index;not null"`
+					Age  int `gorm:"index;not null"`
 				}
 				type Pet struct {
 					gorm.Model
@@ -63,10 +65,10 @@ func main() {
 				if err := db.AutoMigrate(&Pet{}).Error; err != nil {
 					return err
 				}
-				//if err = db.Model(&model.Pet{}).AddForeignKey("person_id", "person(id)", "RESTRICT", "RESTRICT").Error; err != nil {
-				//	// sqlite does not support ADD CONSTRAINT in ALTER TABLE
-				//	return err
-				//}
+				if err = db.Model(&model.Pet{}).AddForeignKey("person_id", "person(id)", "RESTRICT", "RESTRICT").Error; err != nil {
+					// sqlite does not support ADD CONSTRAINT in ALTER TABLE
+					return err
+				}
 				return nil
 			},
 			Rollback: func(db *gorm.DB) error {
@@ -93,10 +95,10 @@ func main() {
 		}
 
 		// all foreign keys here
-		//if err = db.Model(&model.Pet{}).AddForeignKey("person_id", "person(id)", "RESTRICT", "RESTRICT").Error; err != nil {
-		//	// sqlite does not support ADD CONSTRAINT in ALTER TABLE
-		//	return err
-		//}
+		if err = db.Model(&model.Pet{}).AddForeignKey("person_id", "person(id)", "RESTRICT", "RESTRICT").Error; err != nil {
+			// sqlite does not support ADD CONSTRAINT in ALTER TABLE
+			return err
+		}
 
 		return nil
 	})
