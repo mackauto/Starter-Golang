@@ -104,9 +104,8 @@ func main() {
 			"message": "Page not found",
 		})
 	})
-	auth := r.Group("/auth")
+	auth := r.Group("/auth", authMiddleware.MiddlewareFunc())
 	auth.GET("/refresh_token", authMiddleware.RefreshHandler)
-	auth.Use(authMiddleware.MiddlewareFunc())
 	auth.GET("/hello", helloHandler)
 	if err := http.ListenAndServe(":"+port, r); err != nil {
 		log.Fatal(err)
