@@ -11,6 +11,7 @@ func main() {
 	num := flag.Int("num", 5, "num")
 	fmt.Printf("ring method: %d\n", ringMethod(*total, *num))
 	fmt.Printf("recursion method: %d\n", recursionMethod(*total, *num))
+	fmt.Printf("iteration method: %d\n", iterationMethod(*total, *num))
 
 	// test case
 	// total = 9, num = 5, output = 8
@@ -46,4 +47,16 @@ func recursionMethod(total, num int) int {
 	// new is the number after delete
 	// old = (new + num - 1) % total + 1
 	return (recursionMethod(total-1, num)+num-1)%total + 1
+}
+
+func iterationMethod(total, num int) int {
+	// (total) people, number from 0~(total-1), (num-1) out
+	i := 2
+	result := 0
+	for i <= total {
+		result = (result + num) % i
+		i++
+	}
+	// adjust the output to fix start from 1
+	return result + 1
 }

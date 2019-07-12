@@ -25,5 +25,4 @@ func main() {
 	for v := range ch {
 		fmt.Println(*v)
 	}
-	// output: 3 3 3 1 2 3
 }
