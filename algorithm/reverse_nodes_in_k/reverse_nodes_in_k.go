@@ -1,8 +1,6 @@
 package main
 
-import (
-	"github.com/JPMike/Starter-Golang/algorithm/util"
-)
+import "github.com/JPMike/Starter-Golang/leetcode/util"
 
 func reverseKGroup(head *util.ListNode, k int) *util.ListNode {
 	return &util.ListNode{}
@@ -21,12 +19,12 @@ func reverseListNode(start *util.ListNode, end *util.ListNode) *util.ListNode {
 
 func main() {
 	listNodeLen := 5
-	head := util.GetOrderedListNode(listNodeLen)
-	util.PrintListNode(head)
+	head := util.GetOrderedListNode(listNodeLen, false)
+	util.PrintListNode(head, false)
 	end := head
 	for i := 1; i < listNodeLen; i++ {
 		end = end.Next
 	}
 	head = reverseListNode(head, end)
-	util.PrintListNode(head)
+	util.PrintListNode(head, false)
 }

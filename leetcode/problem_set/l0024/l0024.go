@@ -1,8 +1,6 @@
 package main
 
-import (
-	"github.com/JPMike/Starter-Golang/algorithm/util"
-)
+import "github.com/JPMike/Starter-Golang/leetcode/util"
 
 func swapPairs(head *util.ListNode) *util.ListNode {
 	// base condition
@@ -17,8 +15,8 @@ func swapPairs(head *util.ListNode) *util.ListNode {
 }
 
 func main() {
-	head := util.GetOrderedListNode(5)
-	util.PrintListNode(head)
+	head := util.GetOrderedListNode(5, false)
+	util.PrintListNode(head, false)
 	head = swapPairs(head)
-	util.PrintListNode(head)
+	util.PrintListNode(head, false)
 }

@@ -7,7 +7,7 @@ type ListNode struct {
 	Next *ListNode
 }
 
-func GetOrderedListNode(count int) *ListNode {
+func GetOrderedListNode(count int, dummyHead bool) *ListNode {
 	head := &ListNode{Val: 0, Next: nil}
 	cur := head
 	for i := 1; i <= count; i++ {
@@ -15,10 +15,16 @@ func GetOrderedListNode(count int) *ListNode {
 		cur.Next = node
 		cur = node
 	}
+	if dummyHead {
+		return head
+	}
 	return head.Next
 }
 
-func PrintListNode(head *ListNode) {
+func PrintListNode(head *ListNode, dummyHead bool) {
+	if dummyHead {
+		head = head.Next
+	}
 	for head != nil {
 		fmt.Print(head.Val)
 		fmt.Print(" ")
