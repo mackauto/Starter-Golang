@@ -32,3 +32,11 @@ func PrintListNode(head *ListNode, dummyHead bool) {
 	}
 	fmt.Print("\n")
 }
+
+func PrintNums(s []int) {
+	for _, v := range s {
+		fmt.Print(v)
+		fmt.Print(" ")
+	}
+	fmt.Print("\n")
+}
