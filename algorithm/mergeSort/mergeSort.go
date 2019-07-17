@@ -49,7 +49,7 @@ func merge(nums []int, helper []int, low, middle, high int) {
 }
 
 func main() {
-	nums := []int{4, 1, 5, 8, 9, 3, 2, 6, 7}
+	nums := util.GetExampleNums()
 	util.PrintNums(nums)
 	mergeSort(nums)
 	util.PrintNums(nums)

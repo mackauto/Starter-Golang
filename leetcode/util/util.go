@@ -33,10 +33,18 @@ func PrintListNode(head *ListNode, dummyHead bool) {
 	fmt.Print("\n")
 }
 
+func GetExampleNums() []int {
+	return []int{4, 1, 5, 8, 9, 3, 2, 6, 7}
+}
+
 func PrintNums(s []int) {
 	for _, v := range s {
 		fmt.Print(v)
 		fmt.Print(" ")
 	}
 	fmt.Print("\n")
+}
+
+func Swap(nums []int, i, j int) {
+	nums[i], nums[j] = nums[j], nums[i]
 }
