@@ -22,7 +22,7 @@ func middleMaxSum(nums []int, i, m, j int) int {
 			rightMax = rightSum
 		}
 	}
-	return leftSum + rightSum
+	return leftMax + rightMax
 }
 
 func subArrayMaxSumRecursiveMethod(nums []int, i, j int) int {
@@ -30,6 +30,7 @@ func subArrayMaxSumRecursiveMethod(nums []int, i, j int) int {
 	if i == j {
 		return nums[i]
 	}
+	// thing to do in the unit
 	m := (i + j) / 2
 	leftMax := subArrayMaxSumRecursiveMethod(nums, i, m)
 	rightMax := subArrayMaxSumRecursiveMethod(nums, m+1, j)
@@ -61,6 +62,5 @@ func subArrayMaxSum(nums []int) int {
 func main() {
 	nums := []int{2, 4, -7, 5, 2, -1, 2, -4, 3}
 	fmt.Println(subArrayMaxSum(nums)) // 8 {5, 2, -1, 2}
-	// todo recursive method did not do right
 	fmt.Println(subArrayMaxSumRecursiveMethod(nums, 0, len(nums)-1))
 }
