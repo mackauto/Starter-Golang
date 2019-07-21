@@ -4,6 +4,7 @@ import "fmt"
 
 // double node
 type doubleNode struct {
+	Key  string
 	Val  int
 	Prev *doubleNode
 	Next *doubleNode
@@ -33,7 +34,7 @@ func (l *doubleLinkList) InsertHead(node *doubleNode) {
 	l.Len += 1
 }
 
-func (l *doubleLinkList) DeleteTail() int {
+func (l *doubleLinkList) DeleteTail() string {
 	tail := l.Head.Prev
 	prev := tail.Prev
 	prev.Next = l.Head
@@ -41,7 +42,7 @@ func (l *doubleLinkList) DeleteTail() int {
 	tail.Prev = nil
 	tail.Next = nil
 	l.Len -= 1
-	return tail.Val
+	return tail.Key
 }
 
 func (l *doubleLinkList) DeleteNode(node *doubleNode) {
@@ -54,37 +55,49 @@ func (l *doubleLinkList) DeleteNode(node *doubleNode) {
 	l.Len -= 1
 }
 
+type memory map[string]*doubleNode
+
 type LRU struct {
 	Cap    int
-	Memory map[int]*doubleNode
+	Memory memory
 	Lst    *doubleLinkList
 }
 
 func NewLRU(cap int) *LRU {
 	var l LRU
 	l.Cap = cap
-	l.Memory = map[int]*doubleNode{}
+	l.Memory = memory{}
 	l.Lst = NewDoubleLinkList()
 	return &l
 }
 
-func (l *LRU) Get(val int) int {
-	// if val in cache
-	if n, ok := l.Memory[val]; ok {
+func (l *LRU) Push(key string, val int) {
+	// if key in cache
+	if n, ok := l.Memory[key]; ok {
 		l.Lst.DeleteNode(n)
 		l.Lst.InsertHead(n)
 	} else {
 		// if cache is full
 		if l.Lst.Len >= l.Cap {
-			tailVal := l.Lst.DeleteTail()
-			delete(l.Memory, tailVal)
+			tailKey := l.Lst.DeleteTail()
+			delete(l.Memory, tailKey)
 		}
-		node := doubleNode{Val: val}
+		node := doubleNode{Key: key, Val: val}
 		l.Lst.InsertHead(&node)
-		l.Memory[val] = &node
+		l.Memory[key] = &node
 	}
 	//l.Print()
-	return val
+}
+
+func (l *LRU) Get(key string) (b bool, val int) {
+	if n, ok := l.Memory[key]; ok {
+		l.Lst.DeleteNode(n)
+		l.Lst.InsertHead(n)
+		b = true
+		val = n.Val
+	}
+	//l.Print()
+	return
 }
 
 func (l *LRU) Print() {
@@ -98,12 +111,12 @@ func (l *LRU) Print() {
 
 func main() {
 	lru := NewLRU(3)
-	lru.Get(1)
-	lru.Get(2)
-	lru.Get(3)
-	lru.Get(4)
-	lru.Get(2)
-	lru.Get(3)
-	lru.Get(5)
-	//lru.Print()
+	lru.Push("1", 1)
+	lru.Push("2", 2)
+	lru.Push("3", 3)
+	lru.Push("4", 4)
+	lru.Push("2", 2)
+	fmt.Println(lru.Get("4"))
+	fmt.Println(lru.Get("5"))
+	lru.Print()
 }
