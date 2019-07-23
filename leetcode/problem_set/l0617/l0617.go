@@ -20,9 +20,9 @@ func mergeTrees(t1 *util.TreeNode, t2 *util.TreeNode) *util.TreeNode {
 
 func main() {
 	t1 := util.GetExampleTree()
-	t1.PrintMidOrder()
+	t1.PrintInOrder()
 	fmt.Println()
 	t2 := util.GetExampleTree()
 	t := mergeTrees(t1, t2)
-	t.PrintMidOrder()
+	t.PrintInOrder()
 }

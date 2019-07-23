@@ -36,13 +36,13 @@ func treeInsert(t *TreeNode, val int) *TreeNode {
 	return t
 }
 
-func (t *TreeNode) PrintMidOrder() {
+func (t *TreeNode) PrintInOrder() {
 	if t == nil {
 		return
 	}
-	t.Left.PrintMidOrder()
+	t.Left.PrintInOrder()
 	fmt.Print(t.Val, " ")
-	t.Right.PrintMidOrder()
+	t.Right.PrintInOrder()
 }
 
 func (t *TreeNode) PrintPreOrder() {

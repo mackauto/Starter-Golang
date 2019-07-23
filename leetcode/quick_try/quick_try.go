@@ -7,7 +7,7 @@ import (
 
 func main() {
 	t := util.GetExampleTree()
-	t.PrintMidOrder()
+	t.PrintInOrder()
 	fmt.Println()
 	t.PrintPreOrder()
 	fmt.Println()
