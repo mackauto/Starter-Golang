@@ -35,7 +35,6 @@ func inorderTraversalIterationMethod(root *TreeNode) []int {
 		stack = stack[:len(stack)-1]
 		nums = append(nums, cur.Val)
 		cur = cur.Right
-
 	}
 	return nums
 }
