@@ -13,9 +13,11 @@ func findMajority(nums []int, i, j int) int {
 	if i == j {
 		return nums[i]
 	}
+	// divide
 	mid := (i + j) / 2
 	leftMajority := findMajority(nums, i, mid)
 	rightMajority := findMajority(nums, mid+1, j)
+	// conquer
 	if leftMajority == rightMajority {
 		return leftMajority
 	}
@@ -41,6 +43,26 @@ func majorityElementSortMethod(nums []int) int {
 	return nums[len(nums)/2]
 }
 
+func majorityElementMapMethod(nums []int) int {
+	//memory := map[int]int{}
+	memory := make(map[int]int)
+	for _, v := range nums {
+		memory[v] += 1
+		//if _, ok := memory[v]; ok {
+		//	memory[v] += 1
+		//} else {
+		//	memory[v] = 1
+		//}
+	}
+	size := len(nums)
+	for k, v := range memory {
+		if v > size/2 {
+			return k
+		}
+	}
+	return -1
+}
+
 func main() {
 	type t struct {
 		nums []int
@@ -52,7 +74,8 @@ func main() {
 	}
 	for _, t := range ts {
 		//ans := majorityElement(t.nums)
-		ans := majorityElementSortMethod(t.nums)
+		//ans := majorityElementSortMethod(t.nums)
+		ans := majorityElementMapMethod(t.nums)
 		if ans != t.ans {
 			fmt.Println(t.nums, "exp:", t.ans, "res:", ans)
 			return
