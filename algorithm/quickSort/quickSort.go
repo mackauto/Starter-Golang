@@ -26,15 +26,14 @@ func partition(nums []int, left, right int) int {
 }
 
 func quickSort(nums []int, left, right int) {
+	if left >= right {
+		return
+	}
 	// main sort process in partition, which is the unit of work
 	index := partition(nums, left, right)
 	// recursion in left and right
-	if left < index-1 {
-		quickSort(nums, left, index-1)
-	}
-	if index < right {
-		quickSort(nums, index, right)
-	}
+	quickSort(nums, left, index-1)
+	quickSort(nums, index, right)
 }
 
 func main() {
