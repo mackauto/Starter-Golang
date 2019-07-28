@@ -5,24 +5,29 @@ import (
 )
 
 func partition(nums []int, left, right int) int {
-	middle := (left + right) / 2
-	pivot := nums[middle]
-	for left <= right {
-		// find swap position
-		for nums[left] < pivot {
-			left++
+	pivot := nums[left]
+	i := left
+	j := right + 1
+	for {
+		for {
+			i++
+			if i == right || nums[i] > pivot {
+				break
+			}
 		}
-		for nums[right] > pivot {
-			right--
+		for {
+			j--
+			if j == left || nums[j] < pivot {
+				break
+			}
 		}
-		// double check loop condition before swap
-		if left <= right {
-			util.Swap(nums, left, right)
-			left++
-			right--
+		if i >= j {
+			break
 		}
+		util.Swap(nums, i, j)
 	}
-	return left
+	util.Swap(nums, left, j)
+	return j
 }
 
 func quickSort(nums []int, left, right int) {
@@ -33,7 +38,7 @@ func quickSort(nums []int, left, right int) {
 	index := partition(nums, left, right)
 	// recursion in left and right
 	quickSort(nums, left, index-1)
-	quickSort(nums, index, right)
+	quickSort(nums, index+1, right)
 }
 
 func main() {
