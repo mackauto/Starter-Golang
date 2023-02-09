@@ -4,8 +4,8 @@ go 1.12
 
 require (
 	github.com/appleboy/gin-jwt/v2 v2.6.2
-	github.com/gin-gonic/gin v1.4.0
-	github.com/golang/protobuf v1.3.1
+	github.com/gin-gonic/gin v1.7.7
+	github.com/golang/protobuf v1.3.3
 	github.com/jinzhu/gorm v1.9.8
 	github.com/kr/pretty v0.1.0 // indirect
 	github.com/labstack/gommon v0.2.8
