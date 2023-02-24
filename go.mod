@@ -9,7 +9,7 @@ require (
 	github.com/jinzhu/gorm v1.9.8
 	github.com/kr/pretty v0.1.0 // indirect
 	github.com/labstack/gommon v0.2.8
-	golang.org/x/net v0.0.0-20190514140710-3ec191127204
+	golang.org/x/net v0.7.0
 	google.golang.org/grpc v1.19.0
 	gopkg.in/gormigrate.v1 v1.5.0
 )
